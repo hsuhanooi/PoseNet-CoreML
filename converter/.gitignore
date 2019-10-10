@@ -2,3 +2,6 @@ waits/*
 checkpoints/*
 models/*
 .DS_Store
+
+.envrc
+.idea

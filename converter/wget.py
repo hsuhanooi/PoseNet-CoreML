@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-import urllib.request
 import sys
 import json
 import os
 import yaml
+import requests
 
 f = open("config.yaml", "r+")
 cfg = yaml.load(f)
@@ -16,8 +16,16 @@ chk = cfg['chk']
 def download(chkpoint,filename):
 
     url = os.path.join(GOOGLE_CLOUD_STORAGE_DIR , chkpoint , filename)
+    filestore = os.path.join('./waits/' , chkpoint, filename)
 
-    urllib.request.urlretrieve(url, os.path.join('./waits/' , chkpoint , filename))
+    res = requests.get(url)
+    if res.status_code == 200:
+        if filename == 'manifest.json':
+            with open(filestore, 'w') as fp:
+                fp.write(res.text)
+        else:
+            with open(filestore, 'wb') as fp:
+                fp.write(res.content)
 
 if __name__ == "__main__":
 

@@ -1,0 +1,8 @@
+pyyaml
+requests
+opencv-python
+tensorflow==1.14
+coremltools==3.0
+tfcoreml==1.0
+keras==2.2.5
+Pillow
